@@ -12,5 +12,5 @@ export const useReconnect = ({ code, sendMsg, isEvaluator }: IUseReconnect) => {
         if (code != null && sendMsg != null) {
             sendMsg({ message: 'RECONNECT', payload: { code, isEvaluator }});
         }
-    });
+    }, [code, sendMsg, isEvaluator]);
 };
