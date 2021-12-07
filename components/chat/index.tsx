@@ -13,6 +13,7 @@ export const Chat = ({ isEvaluator }: IChat) => {
   const router = useRouter();
   const code = router.query.code as string;
   const [messages, setMessages] = useState<GameMessage[]>([]);
+  const [inputVal, setInputVal] = useState<string>('');
   useReconnect({ code, sendMsg, isEvaluator });
   useEffect(() => {
     const sub = connection!.subscribe((msg) => {
@@ -31,10 +32,10 @@ export const Chat = ({ isEvaluator }: IChat) => {
 
     return () => sub.unsubscribe();
   }, [router, code, connection, isEvaluator]);
-  
-  const onSend = () => {
-      const msg = { message: 'MESSAGE', payload: { code, fromEvaluator: isEvaluator, text: 'elo123'}};
-      setMessages((msgs) => [...msgs, { text: 'elo123', fromEvaluator: isEvaluator }]);
+
+  const onSend = (text: string) => {
+      const msg = { message: 'MESSAGE', payload: { code, fromEvaluator: isEvaluator, text }};
+      setMessages((msgs) => [...msgs, { text, fromEvaluator: isEvaluator }]);
       sendMsg(msg);
   }
 
@@ -46,7 +47,14 @@ export const Chat = ({ isEvaluator }: IChat) => {
               <div key={idx}>{text}</div>
           ))}
       </div>
-      <button onClick={onSend}>Send Msg</button>
+      <form onSubmit={(e) => {
+          e.preventDefault();
+          onSend(inputVal);
+          setInputVal('');
+      }}>
+            <input type="text" value={inputVal} onChange={(e) => setInputVal(e.target.value)} />
+            <button type="submit">Send Msg</button>
+        </form>
     </div>
   );
 }
