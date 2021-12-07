@@ -1,18 +1,19 @@
-import { useActor } from '@xstate/react'
 import type { NextPage } from 'next'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useContext, useEffect } from 'react'
-import { createConnection } from '../../hooks/useEvaluatorState'
+import { useReconnect } from '../../hooks/useReconnect'
+import { WebsocketContext } from '../../providers/WebSocketProvider'
 import { ServerMessage } from '../../types'
 
-const ws = createConnection();
 const Join: NextPage = () => {
+  const { connection, sendMsg } = useContext(WebsocketContext);
   const router = useRouter();
-  const code = router.query.code;
+  const code = router.query.code as string;
+  useReconnect({ code, sendMsg, isEvaluator: false });
   useEffect(() => {
-    const sub = ws!.subscribe((msg) => {
+    const sub = connection!.subscribe((msg) => {
       const message = msg as ServerMessage;
       if (message.message === 'GAME_START') {
           const { withMachine } = message.payload;
@@ -25,7 +26,7 @@ const Join: NextPage = () => {
     });
 
     return () => sub.unsubscribe();
-  }, [router, code]);
+  }, [router, code, connection]);
 
   return (
     <div>
@@ -36,7 +37,7 @@ const Join: NextPage = () => {
       </Head>
       JOIN
       <div>{code}</div>
-      <button onClick={() => ws?.next({ message: 'JOIN', payload: { code }})}>Click to join</button>
+      <button onClick={() => sendMsg({ message: 'JOIN', payload: { code }})}>Click to join</button>
     </div>
   );
 }

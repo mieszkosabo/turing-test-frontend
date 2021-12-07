@@ -1,4 +1,11 @@
+
+export type GameMessage = {
+  text: string;
+  fromEvaluator: boolean;
+};
+
 export type GameCode = string;
+
 export type ServerMessage =
   | {
       message: "NEW_GAME";
@@ -23,6 +30,12 @@ export type ServerMessage =
       payload: {
         wasMachine: boolean;
       };
+    }
+  | {
+      message: "MESSAGE_HISTORY";
+      payload: {
+        messages: GameMessage[];
+      };
     };
 
 export type ClientMessage =
@@ -44,5 +57,12 @@ export type ClientMessage =
         code: GameCode;
         text: string;
         fromEvaluator: boolean;
+      };
+    }
+  | {
+      message: "RECONNECT";
+      payload: {
+        code: GameCode;
+        isEvaluator: boolean;
       };
     };

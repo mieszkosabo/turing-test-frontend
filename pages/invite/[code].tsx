@@ -5,13 +5,15 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useContext, useEffect } from 'react'
 import { createConnection } from '../../hooks/useEvaluatorState'
+import { useReconnect } from '../../hooks/useReconnect'
 import { WebsocketContext } from '../../providers/WebSocketProvider'
 import { ServerMessage } from '../../types'
 
 const Invite: NextPage = () => {
-  const { connection } = useContext(WebsocketContext);
+  const { connection, sendMsg } = useContext(WebsocketContext);
   const router = useRouter();
-  const code = router.query.code;
+  const code = router.query.code as string;
+  useReconnect({ code, sendMsg, isEvaluator: true });
   useEffect(() => {
     const sub = connection!.subscribe((msg) => {
         console.log(msg);
