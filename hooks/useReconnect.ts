@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import { ClientMessage, GameCode, GameMessage } from "../types";
+import { ClientMessage, GameCode } from "../types";
 
 type IUseReconnect = {
     code: GameCode;

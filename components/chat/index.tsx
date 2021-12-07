@@ -22,6 +22,9 @@ export const Chat = ({ isEvaluator }: IChat) => {
         setMessages((msgs) => [...msgs, { text: message.payload.text, fromEvaluator: !isEvaluator}])
       } else if (message.message === 'MESSAGE_HISTORY') {
           setMessages(message.payload.messages);
+      } else if (message.message === 'GAME_END') {
+          const { wasMachine } = message.payload;
+          router.push(`/finish?wasMachine=${wasMachine}&isEvaluator=${isEvaluator}`);
       }
 
     });

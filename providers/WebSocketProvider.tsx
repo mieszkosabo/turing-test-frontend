@@ -1,6 +1,6 @@
 import React, { createContext, useEffect } from 'react';
-import { createConnection } from '../hooks/useEvaluatorState';
 import { Subject } from 'rxjs';
+import { createConnection } from '../utils/createConnection';
 
 const ws = createConnection();
 
