@@ -17,6 +17,7 @@ export type ServerMessage =
       message: "GAME_START";
       payload: {
         withMachine?: boolean;
+        endTime: number;
       };
     }
   | {

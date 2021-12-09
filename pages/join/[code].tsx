@@ -1,7 +1,11 @@
+import { Flex, Text } from '@chakra-ui/layout'
 import type { NextPage } from 'next'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { useContext, useEffect } from 'react'
+import { PrimaryButton } from '../../components/buttons/PrimaryButton'
+import { Layout } from '../../components/layout'
+import { FlexColumn } from '../../components/layout/FlexColumn'
 import { useReconnect } from '../../hooks/useReconnect'
 import { WebsocketContext } from '../../providers/WebSocketProvider'
 import { ServerMessage } from '../../types'
@@ -19,7 +23,8 @@ const Join: NextPage = () => {
           if (withMachine) {
               router.push(`/snake/${code}`);
           } else {
-              router.push(`/chat-human/${code}`);
+              const endTime = message.payload.endTime;
+              router.push(`/chat-human/${code}?endTime=${endTime}`);
           }
       }
     });
@@ -28,11 +33,18 @@ const Join: NextPage = () => {
   }, [router, code, connection]);
 
   return (
-    <div>
-      JOIN
-      <div>{code}</div>
-      <button onClick={() => sendMsg({ message: 'JOIN', payload: { code }})}>Click to join</button>
-    </div>
+    <Layout mt={16}>
+      <FlexColumn>
+        <Text mb={4} fontSize={[16, 24]} color="gray" fontWeight="bold">Hi!</Text>
+        <Text mb={4} fontSize={[16, 24]}>
+          You’re about to take part in a Turing Test. Blablabla
+        </Text>
+
+        <Flex mt={8}>
+          <PrimaryButton onClick={() => sendMsg({ message: 'JOIN', payload: { code }})}>Ok, i'm ready!</PrimaryButton>
+        </Flex>
+      </FlexColumn>
+    </Layout>
   );
 }
 
