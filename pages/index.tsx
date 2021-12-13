@@ -1,7 +1,5 @@
-import { Button } from "@chakra-ui/button";
-import { Flex, HStack, Text } from "@chakra-ui/layout";
+import { HStack, Text } from "@chakra-ui/layout";
 import type { NextPage } from "next";
-import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { useContext, useEffect } from "react";
 import { PrimaryButton } from "../components/buttons/PrimaryButton";
@@ -40,11 +38,18 @@ const Home: NextPage = () => {
         </Text>
 
         <HStack justify="center" spacing={8}>
-          <SecondaryButton size="lg">GitHub</SecondaryButton>
+          <SecondaryButton
+            size="lg"
+            onClick={() => {
+              window.open("https://github.com/mieszkosabo/turingfest-frontend");
+            }}
+          >
+            GitHub
+          </SecondaryButton>
           <PrimaryButton
             size="lg"
             onClick={() =>
-              sendMsg({ message: "INIT", payload: { withHuman: true } })
+              sendMsg({ message: "INIT", payload: { withHuman: false } })
             }
           >
             Click to start
@@ -55,4 +60,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default dynamic(() => Promise.resolve(Home), { ssr: false });
+export default Home;

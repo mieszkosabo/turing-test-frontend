@@ -1,11 +1,9 @@
 import { useClipboard } from "@chakra-ui/hooks";
 import { Flex, Text } from "@chakra-ui/layout";
 import type { NextPage } from "next";
-import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { useContext, useEffect } from "react";
 import { PrimaryButton } from "../../components/buttons/PrimaryButton";
-import { SecondaryButton } from "../../components/buttons/SecondaryButton";
 import { Layout } from "../../components/layout";
 import { FlexColumn } from "../../components/layout/FlexColumn";
 import { useReconnect } from "../../hooks/useReconnect";
@@ -70,4 +68,4 @@ const Invite: NextPage = () => {
   );
 };
 
-export default dynamic(() => Promise.resolve(Invite), { ssr: false });
+export default Invite;

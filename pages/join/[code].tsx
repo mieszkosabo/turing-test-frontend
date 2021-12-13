@@ -1,6 +1,5 @@
 import { Flex, Text } from "@chakra-ui/layout";
 import type { NextPage } from "next";
-import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { useContext, useEffect } from "react";
 import { PrimaryButton } from "../../components/buttons/PrimaryButton";
@@ -20,10 +19,10 @@ const Join: NextPage = () => {
       const message = msg as ServerMessage;
       if (message.message === "GAME_START") {
         const { withMachine } = message.payload;
+        const endTime = message.payload.endTime;
         if (withMachine) {
-          router.push(`/snake/${code}`);
+          router.push(`/wait/${code}?endTime=${endTime}`);
         } else {
-          const endTime = message.payload.endTime;
           router.push(`/chat-human/${code}?endTime=${endTime}`);
         }
       }
@@ -54,4 +53,4 @@ const Join: NextPage = () => {
   );
 };
 
-export default dynamic(() => Promise.resolve(Join), { ssr: false });
+export default Join;
