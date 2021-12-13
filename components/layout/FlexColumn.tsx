@@ -3,4 +3,4 @@ import React from "react";
 
 export const FlexColumn = (props: FlexProps) => (
   <Flex direction="column" {...props} />
-)
+);

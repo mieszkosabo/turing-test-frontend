@@ -1,4 +1,3 @@
-
 export type GameMessage = {
   text: string;
   fromEvaluator: boolean;

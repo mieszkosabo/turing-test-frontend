@@ -5,9 +5,9 @@ export const SecondaryButton = (props: ButtonProps) => (
   <Button
     bg="#D4D4D4"
     _hover={{
-      bg: '#DEDEDE'
+      bg: "#DEDEDE",
     }}
     color="gray"
     {...props}
-    />
-)
+  />
+);

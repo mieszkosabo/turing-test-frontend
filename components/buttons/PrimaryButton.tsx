@@ -6,8 +6,8 @@ export const PrimaryButton = (props: ButtonProps) => (
     bg="brand"
     color="white"
     _hover={{
-      bg: '#067575'
+      bg: "#067575",
     }}
     {...props}
-    />
-)
+  />
+);

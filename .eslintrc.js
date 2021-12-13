@@ -1,21 +1,30 @@
 module.exports = {
-  extends: "erb",
-  rules: {
-    // A temporary hack related to IDE not resolving correct package.json
-    "import/no-extraneous-dependencies": "off",
-    "import/prefer-default-export": "off",
-    "import/no-cycle": "off",
-    "react/jsx-props-no-spreading": "off",
-    "react/display-name": "off",
-    "import/extensions": "off",
+  env: {
+    browser: true,
+    es2021: true,
+    node: true,
   },
-  parserOptions: {
-    ecmaVersion: 2020,
-    sourceType: "module",
-    project: "./tsconfig.json",
-    tsconfigRootDir: __dirname,
-    createDefaultProgram: true,
-  },
+  extends: [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier",
+  ],
   parser: "@typescript-eslint/parser",
-  plugins: ["@typescript-eslint"],
+  parserOptions: {
+    ecmaFeatures: {
+      jsx: true,
+    },
+    ecmaVersion: 13,
+    sourceType: "module",
+  },
+  plugins: ["react", "@typescript-eslint"],
+  rules: {
+    "linebreak-style": ["error", "unix"],
+    quotes: ["error", "double"],
+    semi: ["error", "always"],
+    "react/react-in-jsx-scope": "off",
+    "react/no-unescaped-entities": "off",
+    "@typescript-eslint/no-empty-function": "off",
+  },
 };
