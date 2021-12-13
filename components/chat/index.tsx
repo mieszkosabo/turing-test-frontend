@@ -8,8 +8,8 @@ import { Layout } from "../layout";
 import { FlexColumn } from "../layout/FlexColumn";
 import { Input, Flex, VStack, Box, Text, Button } from "@chakra-ui/react";
 import { Message } from "../Message";
-import { useTimeLeft } from "../../hooks/useTImeLeft";
 import { useIsMyTurn } from "../../hooks/useIsMyTurn";
+import { useTimeLeft } from "../../hooks/useTimeLeft";
 
 export type IChat = {
   isEvaluator: boolean;

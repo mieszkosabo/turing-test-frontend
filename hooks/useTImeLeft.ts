@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { interval, map, mapTo } from "rxjs";
+import { interval, map } from "rxjs";
 
 export const useTimeLeft = (endTime: number) => {
   const [timeLeft, setTimeLeft] = useState<null | string>(null);

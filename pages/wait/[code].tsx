@@ -1,6 +1,5 @@
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
-import { useTimeLeft } from "../../hooks/useTImeLeft";
 import { useReconnect } from "../../hooks/useReconnect";
 import { useContext, useEffect, useState } from "react";
 import { WebsocketContext } from "../../providers/WebSocketProvider";
@@ -8,6 +7,7 @@ import { Layout } from "../../components/layout";
 import { FlexColumn } from "../../components/layout/FlexColumn";
 import { Text } from "@chakra-ui/layout";
 import { ServerMessage } from "../../types";
+import { useTimeLeft } from "../../hooks/useTimeLeft";
 
 const WaitPage: NextPage = () => {
   const router = useRouter();
