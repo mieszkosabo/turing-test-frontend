@@ -46,12 +46,7 @@ const Home: NextPage = () => {
           >
             GitHub
           </SecondaryButton>
-          <PrimaryButton
-            size="lg"
-            onClick={() =>
-              sendMsg({ message: "INIT", payload: { withHuman: false } })
-            }
-          >
+          <PrimaryButton size="lg" onClick={() => sendMsg({ message: "INIT" })}>
             Click to start
           </PrimaryButton>
         </HStack>
